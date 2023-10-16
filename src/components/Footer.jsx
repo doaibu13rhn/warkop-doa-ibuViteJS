@@ -3,44 +3,62 @@ import getImageUrl from "../utils/imageGetter";
 
 function Footer() {
   return (
-    <footer className="py-[2vh] px-[15px] bg-[#f8f8f8] md:py-[2vh] md:px-[3vw] xl:px-[9vw]">
-      <section className="bio flex flex-col md:flex-row gap-[30px] lg:gap-[60px]">
-        <section className="footer-left flex flex-col gap-[24px] mt-[15px]">
-          <section className="coffee-logo flex gap-[15px] items-center">
-            <img className="coffee" src={getImageUrl("Vector", "svg")} alt="coffe.png" />
-            <p className="font-sacramento text-xl text-color-3">Coffee Shop</p>
-          </section>
-          <p className="bio-desc text-[#4f5665] mb-[8px]">
-            Coffee Shop is a store that sells some good <br />
-            meals, and especially coffee. We provide <br />
-            high quality beans
-          </p>
-          <p className="trademarks text-[#afb5c0]">©2020CoffeeStore</p>
-        </section>
-        <section className="footer-product flex flex-col gap-[10px]">
-          <p className="footer-title mb-[10px] text-color-2 text-lg font-medium">Product</p>
-          <p className="footer-desc text-[#4f5665]">Our Product</p>
-          <p className="footer-desc text-[#4f5665]">Pricing</p>
-          <p className="footer-desc text-[#4f5665]">Locations</p>
-          <p className="footer-desc text-[#4f5665]">Countries</p>
-          <p className="footer-desc text-[#4f5665]">Blog</p>
-        </section>
-        <section className="engage flex flex-col gap-[10px]">
-          <p className="footer-title mb-[10px] text-color-2 text-lg font-medium">Engage</p>
-          <p className="footer-desc text-[#4f5665]">Partner</p>
-          <p className="footer-desc text-[#4f5665]">FAQ</p>
-          <p className="footer-desc text-[#4f5665]">About Us</p>
-          <p className="footer-desc text-[#4f5665]">Privacy Policy</p>
-          <p className="footer-desc text-[#4f5665]">Terms of Service</p>
-        </section>
-        <section className="social-media flex flex-col gap-[10px]">
-          <p className="footer-title mb-[10px] text-color-2 text-lg font-medium">Social Media</p>
-          <div className="flex">
-            <img className="FB w-[60px] h-[60px] ml-[-13px]" src={getImageUrl("Facebook", "svg")} alt="Facebook.svg" />
-            <img className="TWT w-[60px] h-[60px]" src={getImageUrl("Twitter", "svg")} alt="Twitter.svg" />
-            <img className="IG w-[60px] h-[60px]" src={getImageUrl("Instagram", "svg")} alt="Instagram.svg" />
+    <footer className="font-plusJakartaSans p-5 mt-5 flex flex-wrap gap-y-8 sm:px-5 md:px-24 pt md:pt-10 md:pb-20 md:mt-10 lg:px-[130px] bg-[#F8F8F8]">
+      <section className="flex flex-col gap-y-6 w-full lg:self-end lg:w-2/5 lg:pr-16">
+        <img
+          src={getImageUrl("coffee-shop", "webp")}
+          alt="logo"
+          className="w-32 h-8"
+        />
+        <span className="text-base font-normal text-secondary">
+          Coffee Shop is a store that sells some good meals, and especially
+          coffee. We provide high quality beans
+        </span>
+        <span className="font-rubik text-base font-semibold text-dark">
+          &copy;2020CoffeeStore
+        </span>
+      </section>
+      <section className="flex flex-col gap-y-5 w-full sm:w-1/3 md:1/3 lg:w-1/5">
+        <p className="text-base font-medium text-dark">Product</p>
+        <p className="text-sm font-normal text-secondary">Our Product</p>
+        <p className="text-sm font-normal text-secondary">Pricing</p>
+        <p className="text-sm font-normal text-secondary">Locations</p>
+        <p className="text-sm font-normal text-secondary">Countries</p>
+        <p className="text-sm font-normal text-secondary">Blog</p>
+      </section>
+      <section className="flex flex-col gap-y-5 w-full sm:w-1/3 md:1/3 lg:w-1/5">
+        <p className="text-base font-medium text-dark">Engage</p>
+        <p className="text-sm font-normal text-secondary">Partner</p>
+        <p className="text-sm font-normal text-secondary">FAQ</p>
+        <p className="text-sm font-normal text-secondary">About Us</p>
+        <p className="text-sm font-normal text-secondary">Provice Policy</p>
+        <p className="text-sm font-normal text-secondary">Term of Services</p>
+      </section>
+      <section className="social-media w-full sm:w-1/3 md:1/3 lg:w-1/5">
+        <p className="text-base font-medium text-dark mb-4">Social Media</p>
+        <div className="flex">
+          <div>
+            <img
+              src={getImageUrl("Facebook", "svg")}
+              alt="Facebook"
+              className="w-full h-full"
+            />
           </div>
-        </section>
+          <div>
+            <img
+              src={getImageUrl("Twitter", "svg")}
+              alt="Twitter"
+              className="w-full h-full"
+            />
+          </div>
+          <div>
+            <img
+              src={getImageUrl("Instagram", "svg")}
+              alt="Instagram"
+              className="w-full h-full"
+            />
+          </div>
+        </div>
       </section>
     </footer>
   );
