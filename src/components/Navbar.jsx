@@ -32,7 +32,7 @@ function Navbar(props) {
             className="w-full h-full"
           />
         </Link>
-        <Link to="/checkout-product" className="hidden lg:block">
+        <Link to="/checkout" className="hidden lg:block">
           <img
             src={getImageUrl("ShoppingCart", "png")}
             alt="ShoppingCart"
@@ -58,7 +58,7 @@ function Navbar(props) {
             className="w-full h-full"
           />
         </Link>
-        <Link to="/checkout-product" className="block lg:hidden">
+        <Link to="/checkout" className="block lg:hidden">
           <img
             src={getImageUrl("ShoppingCart", "png")}
             alt="ShoppingCart"

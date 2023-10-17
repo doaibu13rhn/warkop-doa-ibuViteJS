@@ -39,7 +39,7 @@ function NavbarLogin(props) {
             className="w-full h-full"
           />
         </div>
-        <Link to="/checkout-product" className="hidden lg:block">
+        <Link to="/checkout" className="hidden lg:block">
           <img
             src={getImageUrl("ShoppingCart", "png")}
             alt="ShoppingCart"
@@ -69,13 +69,13 @@ function NavbarLogin(props) {
         >
           <ul className="flex flex-col gap-y-2">
             <li className="p-1 text-light hover:bg-primary hover:text-[#0B0909] hover:font-medium">
-              <Link to="/history-order">History Order</Link>
+              <Link to="/historyOrder">History Order</Link>
             </li>
             <li className="p-1 text-light hover:bg-primary hover:text-[#0B0909] hover:font-medium">
-              <Link to="/detail-order">Detail Order</Link>
+              <Link to="/detailOrder">Detail Order</Link>
             </li>
             <li className="p-1 text-light hover:bg-primary hover:text-[#0B0909] hover:font-medium">
-              <Link to="/detail-product">Detail product</Link>
+              <Link to="/detailProduct">Detail product</Link>
             </li>
             <li className="p-1 text-light hover:bg-primary hover:text-[#0B0909] hover:font-medium">
               <button onClick={() => props.isLogoutClick()}>Logout</button>
@@ -90,7 +90,7 @@ function NavbarLogin(props) {
             className="w-full h-full"
           />
         </Link>
-        <Link to="#" className="block lg:hidden">
+        <Link to="/checkout" className="block lg:hidden">
           <img
             src={getImageUrl("ShoppingCart", "png")}
             alt="ShoppingCart"

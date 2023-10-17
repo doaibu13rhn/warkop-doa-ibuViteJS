@@ -189,7 +189,7 @@ function Register() {
             <span>
               Have An Account?
               <span>
-                <Link to="/login" className="font-medium underline">
+                <Link to="/" className="font-medium underline">
                   Login
                 </Link>
               </span>

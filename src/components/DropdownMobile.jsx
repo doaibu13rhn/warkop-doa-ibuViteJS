@@ -42,7 +42,7 @@ function DropdownMobile(props) {
             <Link to="/product">Product</Link>
           </li>
           <li className="p-1 text-light hover:bg-primary text-center hover:text-[#0B0909] hover:font-medium">
-            <Link to="/checkout-product">Cart</Link>
+            <Link to="/checkout">Cart</Link>
           </li>
           
             <li className="p-1 text-light hover:bg-primary text-center hover:text-[#0B0909] hover:font-medium">
