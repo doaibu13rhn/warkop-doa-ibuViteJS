@@ -475,27 +475,27 @@ function Product() {
             <img
               src={getImageUrl("page-1", "png")}
               alt="page-1"
-              className="w-10 h-10"
+              className="w-10 h-10 cursor-pointer"
             />
             <img
               src={getImageUrl("page-2", "png")}
               alt="page-2"
-              className="w-10 h-10"
+              className="w-10 h-10 cursor-pointer"
             />
             <img
               src={getImageUrl("page-3", "png")}
               alt="page-3"
-              className="w-10 h-10"
+              className="w-10 h-10 cursor-pointer"
             />
             <img
               src={getImageUrl("page-4", "png")}
               alt="page-4"
-              className="w-10 h-10"
+              className="w-10 h-10 cursor-pointer"
             />
             <img
               src={getImageUrl("arrow-right", "png")}
               alt="arrow-right"
-              className="w-10 h-10"
+              className="w-10 h-10 cursor-pointer"
             />
           </div>
         </section>

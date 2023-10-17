@@ -11,7 +11,6 @@ function CheckoutProduct() {
 
     const [isDropdownShown, setIsDropdownShow] = useState(false);
     
-
   return (
     <>
       <NavbarLogin isClick={() => setIsDropdownShow(true)}/>
@@ -201,7 +200,7 @@ function CheckoutProduct() {
                 </button>
                 <button
                   type="button"
-                  className="xs:ps-3 py-3 md:py-3 w-1/3 border rounded-md xs:text-center md:text-center  md:text-center text-sm font-normal text-secondary focus:outline-none focus:border-primary lg:text-base"
+                  className="xs:ps-3 py-3 md:py-3 w-1/3 border rounded-md xs:text-center md:text-center text-sm font-normal text-secondary focus:outline-none focus:border-primary lg:text-base"
                 >
                   Door Delivery
                 </button>
@@ -371,7 +370,6 @@ function CheckoutProduct() {
       {isDropdownShown && (
         <DropdownMobile isClick={() => setIsDropdownShow(false)} />
       )}
-      {/* {openModal && <Modal closeModal={setOpenModal} message={Message} />} */}
     </>
   );
 }
