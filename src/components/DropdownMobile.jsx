@@ -3,14 +3,7 @@ import getImageUrl from "../utils/imageGetter";
 import { Link } from "react-router-dom";
 
 function DropdownMobile(props) {
-  const token = localStorage.getItem("token");
-  const [isLogin, setIsLogin] = useState(false);
-  useEffect(() => {
-    if (token) {
-      setIsLogin(true);
-    }
-  }, []);
-
+  
   return (
     <div
       id="dropdownMobile"
@@ -19,12 +12,12 @@ function DropdownMobile(props) {
       <div className="fixed left-0 top-0 bg-[#0B0909] w-screen h-screen pt-4 px-5 md:px-24 lg:px-[130px]">
         <div className="mb-5 flex justify-between">
           <img
-            src={getImageUrl("coffee-shop-white", "svg")}
-            alt="logo"
+            src={getImageUrl("brand-white", "png")}
+            alt="brand"
             className="w-32 h-8"
           />
           <button className="lg:hidden" onClick={() => props.isClick()}>
-            <img src={getImageUrl("x", "svg")} alt="x" />
+            <img src={getImageUrl("XCircle", "png")} alt="x" />
           </button>
         </div>
         <ul className="flex flex-col gap-y-2 w-full">
@@ -36,41 +29,41 @@ function DropdownMobile(props) {
             />
             <div className="absolute top-3.5 left-4 md:top-3.5 md:left-4">
               <img
-                src={getImageUrl("Search-product", "svg")}
+                src={getImageUrl("Search", "png")}
                 alt="Search-product"
                 className="w-full h-full"
               />
             </div>
           </li>
-          <li className="p-1 text-light hover:bg-light hover:text-[#0B0909] hover:font-medium">
+          <li className="p-1 text-light hover:bg-primary text-center hover:text-[#0B0909] hover:font-medium">
             <Link to="/home">Home</Link>
           </li>
-          <li className="p-1 text-light hover:bg-light hover:text-[#0B0909] hover:font-medium">
+          <li className="p-1 text-light hover:bg-primary text-center hover:text-[#0B0909] hover:font-medium">
             <Link to="/product">Product</Link>
           </li>
-          <li className="p-1 text-light hover:bg-light hover:text-[#0B0909] hover:font-medium">
-            <Link to="/cart">Cart</Link>
+          <li className="p-1 text-light hover:bg-primary text-center hover:text-[#0B0909] hover:font-medium">
+            <Link to="/checkout-product">Cart</Link>
           </li>
-          {!isLogin && (
-            <li className="p-1 text-light hover:bg-light hover:text-[#0B0909] hover:font-medium">
-              <Link to="/">Sign In</Link>
+          
+            <li className="p-1 text-light hover:bg-primary text-center hover:text-[#0B0909] hover:font-medium">
+              <Link to="/login">Sign In</Link>
             </li>
-          )}
-          {!isLogin && (
-            <li className="p-1 text-light hover:bg-light hover:text-[#0B0909] hover:font-medium">
+          
+          
+            <li className="p-1 text-light hover:bg-primary text-center hover:text-[#0B0909] hover:font-medium">
               <Link to="/register">Sign Up</Link>
             </li>
-          )}
-          {isLogin && (
-            <li className="p-1 text-light hover:bg-light hover:text-[#0B0909] hover:font-medium">
+          
+          
+            <li className="p-1 text-light hover:bg-primary text-center hover:text-[#0B0909] hover:font-medium">
               <Link to="/profile">Profile</Link>
             </li>
-          )}
-          {isLogin && (
-            <li className="p-1 text-light hover:bg-light hover:text-[#0B0909] hover:font-medium">
+          
+          
+            <li className="p-1 text-light hover:bg-primary text-center hover:text-[#0B0909] hover:font-medium">
               <button>Logout</button>
             </li>
-          )}
+          
         </ul>
       </div>
     </div>

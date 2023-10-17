@@ -13,7 +13,7 @@ function NavbarLogin(props) {
       <div className="nav-start flex items-center gap-x-[60px] text-sm font-normal">
         <div>
           <img
-            src={getImageUrl("coffee-shop-white", "svg")}
+            src={getImageUrl("brand-white", "png")}
             alt="logo"
             className="w-32 h-8"
           />
@@ -34,28 +34,28 @@ function NavbarLogin(props) {
       <div className="nav-end flex gap-x-[22px] items-center">
         <div className="icon-search hidden lg:block">
           <img
-            src={getImageUrl("Search-white", "svg")}
+            src={getImageUrl("Search", "png")}
             alt="Search"
             className="w-full h-full"
           />
         </div>
-        <Link href="#" className="hidden lg:block">
+        <Link to="/checkout-product" className="hidden lg:block">
           <img
-            src={getImageUrl("ShoppingCart-white", "svg")}
+            src={getImageUrl("ShoppingCart", "png")}
             alt="ShoppingCart"
             className="w-full h-full"
           />
         </Link>
-        <Link href="/profile" className="hidden lg:block">
+        <Link to="/profile" className="hidden lg:block">
           <img
-            src={getImageUrl("profile", "jpg")}
+            src={getImageUrl("user-profile", "png")}
             alt="icon-profile"
             className="rounded-full w-8 h-8"
           />
         </Link>
         <button id="dropdown-arrow" className="hidden lg:block cursor-pointer">
           <img
-            src={getImageUrl("down-white", "svg")}
+            src={getImageUrl("down", "png")}
             alt="down"
             className="w-full h-full"
             onClick={btnArrowHandle}
@@ -68,19 +68,39 @@ function NavbarLogin(props) {
           id="dropdown-menu"
         >
           <ul className="flex flex-col gap-y-2">
-            <li className="p-1 text-light hover:bg-light hover:text-[#0B0909] hover:font-medium">
+            <li className="p-1 text-light hover:bg-primary hover:text-[#0B0909] hover:font-medium">
               <Link to="/history-order">History Order</Link>
             </li>
-            <li className="p-1 text-light hover:bg-light hover:text-[#0B0909] hover:font-medium">
+            <li className="p-1 text-light hover:bg-primary hover:text-[#0B0909] hover:font-medium">
+              <Link to="/detail-order">Detail Order</Link>
+            </li>
+            <li className="p-1 text-light hover:bg-primary hover:text-[#0B0909] hover:font-medium">
+              <Link to="/detail-product">Detail product</Link>
+            </li>
+            <li className="p-1 text-light hover:bg-primary hover:text-[#0B0909] hover:font-medium">
               {/*  eslint-disable-next-line react/prop-types */}
               <button onClick={() => props.isLogoutClick()}>Logout</button>
             </li>
           </ul>
         </div>
         {/*  eslint-disable-next-line react/prop-types */}
+        <Link to="#" className="icon-search block lg:hidden">
+          <img
+            src={getImageUrl("Search", "png")}
+            alt="Search"
+            className="w-full h-full"
+          />
+        </Link>
+        <Link to="#" className="block lg:hidden">
+          <img
+            src={getImageUrl("ShoppingCart", "png")}
+            alt="ShoppingCart"
+            className="w-full h-full"
+          />
+        </Link>
         <button className="lg:hidden" onClick={() => props.isClick()}>
           <img
-            src={getImageUrl("burger-menu", "svg")}
+            src={getImageUrl("hamburger", "png")}
             alt="burger-menu"
             id="burger-menu"
             className="w-full h-full"

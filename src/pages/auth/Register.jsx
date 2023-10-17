@@ -4,12 +4,9 @@ import axios from "axios";
 
 import getImageUrl from "../../utils/imageGetter";
 import "../../style/style.css";
-import Modal from "../../components/modal/Modal";
+
 
 function Register() {
-  useEffect(() => {
-    document.title = "Register";
-  });
 
   const [isPassShown, setIsPassShown] = useState(false);
   const [isPassShown2, setIsPassShown2] = useState(false);
@@ -22,48 +19,19 @@ function Register() {
     setIsPassShown2((state) => !state);
   };
 
-  const [Message, setMessage] = useState({ msg: null, isError: null });
-  const [openModal, setOpenModal] = useState(false);
-
-  const navigate = useNavigate();
-  const submitHandler = (e) => {
-    e.preventDefault();
-
-    if (e.target.password.value !== e.target.confirmPassword.value)
-      return console.log("Password dont match");
-
-    const body = {
-      users_fullname: e.target.fullname.value,
-      users_email: e.target.email.value,
-      users_password: e.target.password.value,
-    };
-
-    const url = "http://localhost:3000/auth/register";
-    axios
-      .post(url, body)
-      .then(() => navigate("/"))
-      .catch((err) => {
-        setMessage({
-          msg: err.response.data.msg,
-          isError: true,
-        });
-        setOpenModal(true);
-      });
-  };
-
   return (
     <>
       <main className="flex gap-[70px] lg:items-center">
         <aside className="hidden lg:block lg:w-2/5 xl:w-1/3">
           <img
-            src={getImageUrl("coffee-1", "webp")}
+            src={getImageUrl("register", "png")}
             alt="hero"
             className="w-full h-full"
           />
         </aside>
         <section className="font-plusJakartaSans w-full h-full py-12 px-5 flex flex-col justify-center gap-y-5 lg:w-3/5 xl:w-2/3 md:py-20 md:px-24 lg:p-0 lg:pr-[130px]">
           <img
-            src={getImageUrl("coffee-shop", "webp")}
+            src={getImageUrl("brand", "png")}
             alt="logo"
             className="w-32 h-8"
           />
@@ -73,7 +41,7 @@ function Register() {
               Fill out the form correctly
             </span>
           </header>
-          <form className="flex flex-col gap-y-5" onSubmit={submitHandler}>
+          <form className="flex flex-col gap-y-5">
             <div className="flex flex-col gap-y-3 relative">
               <label
                 htmlFor="fullname"
@@ -87,11 +55,11 @@ function Register() {
                 placeholder="Enter Your Full Name"
                 className="py-3.5 px-10 border rounded-lg border-[#DEDEDE] text-xs tracking-wide outline-none focus:border-primary"
               />
-              <div className="icon-email absolute top-[46px] left-4 md:top-[50px]">
+              <div className="icon-email absolute top-[42px] left-2 md:top-[47px]">
                 <img
                   src={getImageUrl("Profile", "png")}
                   alt="mail.svg"
-                  className="w-full h-full"
+                  className="w-auto"
                 />
               </div>
             </div>
@@ -108,9 +76,9 @@ function Register() {
                 placeholder="Enter Your Email"
                 className="py-3.5 px-10 border rounded-lg border-[#DEDEDE] text-xs tracking-wide outline-none focus:border-primary"
               />
-              <div className="icon-email absolute top-[46px] left-4 md:top-[50px]">
+              <div className="icon-email absolute top-[48px] left-3 md:top-[53px]">
                 <img
-                  src={getImageUrl("mail", "svg")}
+                  src={getImageUrl("message", "png")}
                   alt="mail.svg"
                   className="w-full h-full"
                 />
@@ -131,7 +99,7 @@ function Register() {
               />
               <div className="icon-password absolute top-[46px] left-4 md:top-[50px]">
                 <img
-                  src={getImageUrl("Password", "svg")}
+                  src={getImageUrl("Password", "png")}
                   alt="Password"
                   className="w-full h-full"
                 />
@@ -144,7 +112,7 @@ function Register() {
                 onClick={showPassHandler}
               >
                 <img
-                  src={getImageUrl("EyeSlash", "svg")}
+                  src={getImageUrl("EyeSlash", "png")}
                   alt="EyeSlash"
                   className="w-full h-full"
                 />
@@ -157,7 +125,7 @@ function Register() {
                 onClick={showPassHandler}
               >
                 <img
-                  src={getImageUrl("eye", "svg")}
+                  src={getImageUrl("EyeSlash", "png")}
                   alt="eye"
                   className="w-[18px] h-[18px]"
                 />
@@ -178,7 +146,7 @@ function Register() {
               />
               <div className="icon-password absolute top-[46px] left-4 md:top-[50px]">
                 <img
-                  src={getImageUrl("Password", "svg")}
+                  src={getImageUrl("Password", "png")}
                   alt="Password"
                   className="w-full h-full"
                 />
@@ -191,7 +159,7 @@ function Register() {
                 onClick={showPassHandler2}
               >
                 <img
-                  src={getImageUrl("EyeSlash", "svg")}
+                  src={getImageUrl("EyeSlash", "png")}
                   alt="EyeSlash"
                   className="w-full h-full"
                 />
@@ -204,7 +172,7 @@ function Register() {
                 onClick={showPassHandler2}
               >
                 <img
-                  src={getImageUrl("eye", "svg")}
+                  src={getImageUrl("EyeSlash", "png")}
                   alt="eye"
                   className="w-[18px] h-[18px]"
                 />
@@ -221,7 +189,7 @@ function Register() {
             <span>
               Have An Account?
               <span>
-                <Link to="/" className="font-medium underline">
+                <Link to="/login" className="font-medium underline">
                   Login
                 </Link>
               </span>
@@ -239,7 +207,7 @@ function Register() {
             >
               <div>
                 <img
-                  src={getImageUrl("facebook-circle", "svg")}
+                  src={getImageUrl("facebook-icon", "png")}
                   alt="facebook-icon"
                   className="w-full h-full"
                 />
@@ -252,7 +220,7 @@ function Register() {
             >
               <div>
                 <img
-                  src={getImageUrl("google-circle", "svg")}
+                  src={getImageUrl("google-icon", "png")}
                   alt="google-icon"
                   className="w-full h-full"
                 />
@@ -262,7 +230,6 @@ function Register() {
           </div>
         </section>
       </main>
-      {openModal && <Modal closeModal={setOpenModal} message={Message} />}
     </>
   );
 }

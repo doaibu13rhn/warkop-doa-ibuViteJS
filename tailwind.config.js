@@ -13,6 +13,7 @@ export default {
         secondary: "#4F5665",
         dark: "#0B132A",
         light: "#FFF",
+        brown: "#8E6447",
       },
       gridTemplateColumns: {
         product: "repeat(2, 0.5fr)",

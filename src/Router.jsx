@@ -1,16 +1,19 @@
 import { createBrowserRouter } from "react-router-dom";
 
-import Login from "./pages/auth/login";
+import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import ForgotPassword from "./pages/auth/ForgotPassword";
 import Home from "./pages/user/Home";
 import Profile from "./pages/user/Profile";
 import Product from "./pages/user/Product";
 import DetailProduct from "./pages/user/DetailProduct";
+import CheckoutProduct from "./pages/user/CheckoutProduct";
+import HistoryOrder from "./pages/user/HistoryOrder";
+import DetailOrder from "./pages/user/DetailOrder";
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/login",
     element: <Login />,
     // errorElement: "",
   },
@@ -42,6 +45,21 @@ const router = createBrowserRouter([
   {
     path: "/detail-product",
     element: <DetailProduct />,
+    // errorElement: "",
+  },
+  {
+    path: "/checkout-product",
+    element: <CheckoutProduct />,
+    // errorElement: "",
+  },
+  {
+    path: "/history-order",
+    element: <HistoryOrder />,
+    // errorElement: "",
+  },
+  {
+    path: "/detail-order",
+    element: <DetailOrder />,
     // errorElement: "",
   },
 ]);

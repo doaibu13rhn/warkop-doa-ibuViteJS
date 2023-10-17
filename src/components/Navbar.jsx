@@ -4,10 +4,10 @@ import getImageUrl from "../utils/imageGetter";
 
 function Navbar(props) {
   return (
-    <nav className="w-full flex justify-between py-4 px-5 items-center font-plusJakartaSans bg-[#0B0909] md:px-24 lg:px-[130px]">
+    <nav className="w-full flex justify-between py-4 px-5 items-center font-plusJakartaSans bg-[#0B0909] md:px-24 lg:px-[130px]"> 
       <div className="nav-start flex items-center gap-x-[60px] text-sm font-normal">
         <img
-          src={getImageUrl("coffee-shop-white", "svg")}
+          src={getImageUrl("brand-white", "png")}
           alt="logo"
           className="w-32 h-8"
         />
@@ -17,30 +17,30 @@ function Navbar(props) {
         >
           Home
         </Link>
-        <a
-          href="/product"
+        <Link
+          to="/product"
           className="text-light hover:border-b-2 hover:border-primary focus:border-b-2 focus:border-primary hidden lg:block"
         >
           Product
-        </a>
+        </Link>
       </div>
       <div className="nav-end flex gap-x-[22px] items-center">
         <Link to="#" className="icon-search hidden lg:block">
           <img
-            src={getImageUrl("Search-white", "svg")}
+            src={getImageUrl("Search", "png")}
             alt="Search"
             className="w-full h-full"
           />
         </Link>
-        <Link to="#" className="hidden lg:block">
+        <Link to="/checkout-product" className="hidden lg:block">
           <img
-            src={getImageUrl("ShoppingCart-white", "svg")}
+            src={getImageUrl("ShoppingCart", "png")}
             alt="ShoppingCart"
             className="w-full h-full"
           />
         </Link>
         <Link
-          to="/"
+          to="/login"
           className="text-light text-sm font-medium py-3 px-[18px] border border-[#ebeaea] hover:bg-light hover:text-dark rounded-md hidden lg:block active:ring active:ring-slate-300"
         >
           Sign In
@@ -51,9 +51,23 @@ function Navbar(props) {
         >
           Sign Up
         </Link>
+        <Link to="#" className="icon-search block lg:hidden">
+          <img
+            src={getImageUrl("Search", "png")}
+            alt="Search"
+            className="w-full h-full"
+          />
+        </Link>
+        <Link to="/checkout-product" className="block lg:hidden">
+          <img
+            src={getImageUrl("ShoppingCart", "png")}
+            alt="ShoppingCart"
+            className="w-full h-full"
+          />
+        </Link>
         <button className="text-2xl lg:hidden" onClick={() => props.isClick()}>
           <img
-            src={getImageUrl("burger-menu", "svg")}
+            src={getImageUrl("hamburger", "png")}
             alt="burger-menu"
             id="burger-menu"
             className="w-full h-full"

@@ -6,57 +6,11 @@ import getImageUrl from "../../utils/imageGetter";
 import NavbarLogin from "../../components/NavbarLogin";
 import Footer from "../../components/Footer";
 import DropdownMobile from "../../components/DropdownMobile";
-import Modal from "../../components/modal/Modal";
 
 function DetailProduct() {
-  useEffect(() => {
-    document.title = "Product";
-  });
-
-  const token = localStorage.getItem("token");
-  const [isLogin, setIsLogin] = useState(false);
-  useEffect(() => {
-    if (token) {
-      setIsLogin(true);
-    }
-  }, []);
 
   const [isDropdownShown, setIsDropdownShow] = useState(false);
-
-  const [searchParams, setSearchParams] = useSearchParams();
-  const url = "http://localhost:3000";
-  const paramsId = searchParams.get("id");
-  const authAxios = axios.create({
-    baseURL: url,
-    headers: {
-      Authorization: `Barer ${token}`,
-    },
-  });
-
-  const [Message, setMessage] = useState({ msg: null, isError: null });
-  const [openModal, setOpenModal] = useState(false);
-
-  const [productById, setProductById] = useState([]);
-  useEffect(() => {
-    authAxios
-      .get("/products/" + paramsId)
-      .then((res) => {
-        setProductById(res.data.result[0]);
-      })
-      .catch((err) => console.log(err));
-  }, []);
-
-  const [sizes, setSizes] = useState([]);
-  useEffect(() => {
-    authAxios
-      .get("/sizes")
-      .then((res) => {
-        // console.log(res.data.result);
-        setSizes(res.data.result);
-      })
-      .catch((err) => console.log(err));
-  }, []);
-
+  
   const [count, setCount] = useState(1);
   const setCountHandler = (e) => {
     e.target.id == "minus" && count != 0
@@ -64,57 +18,16 @@ function DetailProduct() {
       : setCount((count) => count + 1);
   };
 
-  const [size, setSize] = useState(1);
-  const choseSizeHandler = (e) => {
-    // console.log(e.target.id);
-    setSize(e.target.id);
-  };
-  console.log(size);
-
-  const [hotIce, setHotice] = useState("Hot");
-  const choseHoticeHandler = (e) => {
-    // console.log(e.target.innerText);
-    setHotice(e.target.innerText);
-  };
-
-  const onSubmitHandler = (e) => {
-    e.preventDefault();
-
-    const body = {
-      products_id: paramsId,
-      sizes_id: size,
-      orders_products_qty: count,
-      hot_or_ice: hotIce,
-    };
-
-    authAxios
-      .post("/orders", body)
-      .then((res) => {
-        setMessage({
-          msg: res.data.msg,
-          isError: false,
-        });
-        setOpenModal(true);
-      })
-      .catch((err) => {
-        setMessage({
-          msg: err.response.data.msg,
-          isError: true,
-        });
-        setOpenModal(true);
-      });
-  };
-
   return (
     <>
-      {isLogin && <NavbarLogin isClick={() => setIsDropdownShow(true)} />}
+      <NavbarLogin isClick={() => setIsDropdownShow(true)}/>
       <main className="font-plusJakartaSans px-5 lg:px-[130px] md:px-24 mt-5 md:mt-[87px]">
         <section className="flex flex-col lg:flex-row gap-x-5">
           <section className="w-full flex flex-col gap-y-4 md:flex-row max-lg:justify-between lg:gap-y-7 lg:flex-col lg:w-3/5 xl:1/2">
             <div className="w-full md:w-[73%] lg:w-full">
               <figure>
                 <img
-                  src={productById.products_image}
+                  src={getImageUrl("product-1", "png")}
                   alt="coffe-1"
                   className="w-full h-full"
                 />
@@ -123,21 +36,21 @@ function DetailProduct() {
             <div className="w-full md:w-[23%] lg:w-full flex justify-between gap-x-4 md:flex-col md:gap-y-3 lg:flex-row lg:gap-x-7">
               <figure>
                 <img
-                  src={getImageUrl("image32", "webp")}
+                  src={getImageUrl("kopi-1", "png")}
                   alt="coffe-1"
                   className="w-full h-full"
                 />
               </figure>
               <figure>
                 <img
-                  src={getImageUrl("image33", "webp")}
+                  src={getImageUrl("kopi-2", "png")}
                   alt="coffe-1"
                   className="w-full h-full"
                 />
               </figure>
               <figure>
                 <img
-                  src={getImageUrl("image34", "webp")}
+                  src={getImageUrl("kopi-3", "png")}
                   alt="coffe-1"
                   className="w-full h-full"
                 />
@@ -149,19 +62,19 @@ function DetailProduct() {
               FLASH SALE!
             </p>
             <h1 className="text-2xl lg:text-3xl xl:text-5xl font-medium text-[#0B0909]">
-              {productById.products_name}
+              Kopi kenangan mantan
             </h1>
             <div className="flex gap-x-3 items-center">
               <p className="text-xs font-medium line-through text-[#D00000]">
-                IDR 20.000
+                IDR 30.000
               </p>
               <p className="text-[22px] font-bold text-dark">
-                Rp.{productById.products_price}
+                Rp. 25.000
               </p>
             </div>
             <div>
               <img
-                src={getImageUrl("star", "webp")}
+                src={getImageUrl("stars", "png")}
                 alt="star"
                 className="w-full h-full"
               />
@@ -172,14 +85,14 @@ function DetailProduct() {
               <p>Recomendation</p>
               <div>
                 <img
-                  src={getImageUrl("ThumbsUp", "svg")}
+                  src={getImageUrl("ThumbsUp", "png")}
                   alt="ThumbsUp"
                   className="w-full h-full"
                 />
               </div>
             </div>
             <p className="text-sm xl:text-base font-normal text-secondary">
-              {productById.products_desc}
+            Cold brewing is a method of brewing that combines ground coffee and cool water and uses time instead of heat to extract the flavor. It is brewed in small batches and steeped for as long as 48 hours.
             </p>
             <div className="flex relative">
               <button
@@ -187,7 +100,7 @@ function DetailProduct() {
                 onClick={setCountHandler}
               >
                 <img
-                  src={getImageUrl("minus", "svg")}
+                  src={getImageUrl("minus", "png")}
                   alt="minus"
                   className="w-full h-full"
                   id="minus"
@@ -201,7 +114,7 @@ function DetailProduct() {
                 onClick={setCountHandler}
               >
                 <img
-                  src={getImageUrl("plus", "svg")}
+                  src={getImageUrl("plus", "png")}
                   alt="plus"
                   className="w-full h-full"
                   id="plus"
@@ -213,17 +126,26 @@ function DetailProduct() {
                 Chose Size
               </p>
               <div className="text-sm flex flex-wrap justify-between md:text-base font-normal text-[#0B0909] gap-4 lg:gap-x-2">
-                {sizes.map((result, i) => (
+                
                   <button
                     type="button"
                     className="border focus:border-primary py-2 w-[47%] md:w-[48%] flex justify-center"
-                    onClick={choseSizeHandler}
-                    key={i}
-                    id={result.sizes_id}
                   >
-                    {result.sizes_name}
+                    Regular
                   </button>
-                ))}
+                  <button
+                    type="button"
+                    className="border focus:border-primary py-2 w-[47%] md:w-[48%] flex justify-center"
+                  >
+                    Medium
+                  </button>
+                  <button
+                    type="button"
+                    className="border focus:border-primary py-2 w-[47%] md:w-[48%] flex justify-center"
+                  >
+                    Large
+                  </button>
+      
               </div>
             </div>
             <div className="w-full">
@@ -234,14 +156,12 @@ function DetailProduct() {
                 <button
                   type="button"
                   className="p-2 border focus:border-primary w-1/2"
-                  onClick={choseHoticeHandler}
                 >
                   Hot
                 </button>
                 <button
                   type="button"
                   className="p-2 border focus:border-primary w-1/2"
-                  onClick={choseHoticeHandler}
                 >
                   Ice
                 </button>
@@ -251,21 +171,21 @@ function DetailProduct() {
               <button
                 type="button"
                 className="text-sm font-medium p-2 bg-primary w-full md:w-1/2 rounded-md border border-primary hover:bg-amber-600 active:ring active:ring-orange-300"
-                onClick={onSubmitHandler}
               >
                 Buy
               </button>
               <button
                 type="button"
-                className="text-sm font-medium p-2 bg-light border border-primary w-full md:w-1/2 flex justify-center rounded-md hover:bg-slate-200 active:ring active:ring-orange-300"
+                className="text-sm items-center font-medium p-2 bg-light border text-primary border-primary w-full md:w-1/2 flex justify-center rounded-md hover:bg-slate-200 active:ring active:ring-orange-300"
               >
                 <div>
                   <img
-                    src={getImageUrl("ShoppingCartOrange", "svg")}
+                    src={getImageUrl("ShoppingCart-yellow", "png")}
                     alt="ShoppingCartOrange"
                     className="w-full h-full"
                   />
                 </div>
+                Add to cart
               </button>
             </div>
           </aside>
@@ -279,7 +199,7 @@ function DetailProduct() {
           <div className="mt-6 flex flex-col gap-y-6 md:flex-row md:flex-wrap md:justify-between xl:flex-nowrap xl:gap-x-5">
             <div className="flex flex-col items-center md:w-[48%] xl:w-full">
               <img
-                src={getImageUrl("image30", "webp")}
+                src={getImageUrl("product-2", "png")}
                 alt="product"
                 className="w-full h-full"
               />
@@ -307,7 +227,7 @@ function DetailProduct() {
                   >
                     <div>
                       <img
-                        src={getImageUrl("ShoppingCartOrange", "svg")}
+                        src={getImageUrl("ShoppingCart-yellow", "png")}
                         alt="cart"
                         className="w-full h-full"
                       />
@@ -318,7 +238,7 @@ function DetailProduct() {
             </div>
             <div className="flex flex-col items-center md:w-[48%] xl:w-full">
               <img
-                src={getImageUrl("image31", "webp")}
+                src={getImageUrl("product-1", "png")}
                 alt="product"
                 className="w-full h-full"
               />
@@ -346,7 +266,7 @@ function DetailProduct() {
                   >
                     <div>
                       <img
-                        src={getImageUrl("ShoppingCartOrange", "svg")}
+                        src={getImageUrl("ShoppingCart-yellow", "png")}
                         alt="cart"
                         className="w-full h-full"
                       />
@@ -357,7 +277,7 @@ function DetailProduct() {
             </div>
             <div className="flex flex-col items-center md:w-[48%] xl:w-full">
               <img
-                src={getImageUrl("image31", "webp")}
+                src={getImageUrl("product-3", "png")}
                 alt="product"
                 className="w-full h-full"
               />
@@ -385,7 +305,7 @@ function DetailProduct() {
                   >
                     <div>
                       <img
-                        src={getImageUrl("ShoppingCartOrange", "svg")}
+                        src={getImageUrl("ShoppingCart-yellow", "png")}
                         alt="cart"
                         className="w-full h-full"
                       />
@@ -401,7 +321,7 @@ function DetailProduct() {
         <DropdownMobile isClick={() => setIsDropdownShow(false)} />
       )}
       <Footer />
-      {openModal && <Modal closeModal={setOpenModal} message={Message} />}
+      {/* {openModal && <Modal closeModal={setOpenModal} message={Message} />} */}
     </>
   );
 }

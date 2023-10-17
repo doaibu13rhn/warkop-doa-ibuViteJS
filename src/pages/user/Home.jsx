@@ -6,28 +6,15 @@ import getImageUrl from "../../utils/imageGetter";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import DropdownMobile from "../../components/DropdownMobile";
-import NavbarLogin from "../../components/NavbarLogin";
+// import NavbarLogin from "../../components/NavbarLogin";
 
 function Home() {
-  useEffect(() => {
-    document.title = "Home";
-  });
-
-  const token = localStorage.getItem("token");
-  const [isLogin, setIsLogin] = useState(false);
-  useEffect(() => {
-    if (token) {
-      setIsLogin(true);
-    }
-  }, []);
 
   const [isDropdownShown, setIsDropdownShow] = useState(false);
 
   return (
     <>
-      {isLogin && <NavbarLogin isClick={() => setIsDropdownShow(true)} />}
-      {!isLogin && <Navbar isClick={() => setIsDropdownShow(true)} />}
-
+      <Navbar isClick={() => setIsDropdownShow(true)}></Navbar>
       <header className="flex flex-wrap font-plusJakartaSans">
         <div className="w-full max-sm:h-screen select-none flex items-center py-4 px-5 md:px-24 lg:px-[130px] max-[1400px]:h-[700px] min-[1400px]:h-[1024px] xl:w-1/2 header-section">
           <article className="flex flex-col gap-y-6 items-baseline relative">
@@ -74,17 +61,17 @@ function Home() {
             </div>
             <div className="absolute bottom-20 right-0 p-3 bg-primary rounded-full md:bottom-[100px] xl:hidden">
               <img
-                src={getImageUrl("ChatCircleDots", "svg")}
+                src={getImageUrl("ChatCircleDots", "png")}
                 alt="ChatCircleDots"
                 className="w-8 h-8"
               />
             </div>
           </article>
         </div>
-        <div className="bg-cover bg-[url('/src/assets/img/Rectangle287.webp')] max-[1400px]:h-[700px] hidden xl:w-1/2 xl:block">
+        <div className="bg-cover bg-[url('/src/assets/images/home-section-1.png')] max-[1400px]:h-[700px] hidden xl:w-1/2 xl:block">
           <div className="absolute bottom-0 right-24 max-[1400px]:bottom-20 min-[1400px]:bottom-0 p-3 bg-primary rounded-full">
             <img
-              src={getImageUrl("ChatCircleDots", "svg")}
+              src={getImageUrl("ChatCircleDots", "png")}
               alt="ChatCircleDots"
               className="max-w-full max-h-full"
             />
@@ -109,7 +96,7 @@ function Home() {
               <div className="flex items-center gap-x-[10px]">
                 <div>
                   <img
-                    src={getImageUrl("check-circle", "svg")}
+                    src={getImageUrl("checklist", "png")}
                     alt="check"
                     className="w-full h-full"
                   />
@@ -121,7 +108,7 @@ function Home() {
               <div className="flex items-center gap-x-[10px]">
                 <div>
                   <img
-                    src={getImageUrl("check-circle", "svg")}
+                    src={getImageUrl("checklist", "png")}
                     alt="check"
                     className="w-full h-full"
                   />
@@ -133,7 +120,7 @@ function Home() {
               <div className="flex items-center gap-x-[10px]">
                 <div>
                   <img
-                    src={getImageUrl("check-circle", "svg")}
+                    src={getImageUrl("checklist", "png")}
                     alt="check"
                     className="w-full h-full"
                   />
@@ -145,7 +132,7 @@ function Home() {
               <div className="flex items-center gap-x-[10px]">
                 <div>
                   <img
-                    src={getImageUrl("check-circle", "svg")}
+                    src={getImageUrl("checklist", "png")}
                     alt="check"
                     className="w-full h-full"
                   />
@@ -157,7 +144,7 @@ function Home() {
             </div>
           </article>
         </div>
-        <div className="bg-cover bg-[url('src/assets/img/Rectangle291.webp')] h-[574px] hidden xl:block xl:w-1/2"></div>
+        <div className="bg-cover bg-[url('src/assets/images/home-section-2.png')] h-[574px] hidden xl:block xl:w-1/2"></div>
       </header>
       <main className="font-plusJakartaSans px-5 md:px-24 lg:py-20 lg:px-[130px]">
         <div className="items-center text-center flex flex-col gap-y-5">
@@ -173,7 +160,7 @@ function Home() {
         <div className="mt-6 flex flex-col gap-y-6 md:flex-row md:flex-wrap md:justify-between xl:flex-nowrap xl:gap-x-5">
           <div className="flex flex-col items-center md:w-[48%] xl:w-full">
             <img
-              src={getImageUrl("image27", "webp")}
+              src={getImageUrl("product-1", "png")}
               alt="product"
               className="w-full h-full"
             />
@@ -201,7 +188,7 @@ function Home() {
                 >
                   <div>
                     <img
-                      src={getImageUrl("ShoppingCartOrange", "svg")}
+                      src={getImageUrl("ShoppingCart-yellow", "png")}
                       alt="cart"
                       className="w-full h-full"
                     />
@@ -212,7 +199,7 @@ function Home() {
           </div>
           <div className="flex flex-col items-center md:w-[48%] xl:w-full">
             <img
-              src={getImageUrl("image22", "webp")}
+              src={getImageUrl("product-2", "png")}
               alt="product"
               className="w-full h-full"
             />
@@ -240,7 +227,7 @@ function Home() {
                 >
                   <div>
                     <img
-                      src={getImageUrl("ShoppingCartOrange", "svg")}
+                      src={getImageUrl("ShoppingCart-yellow", "png")}
                       alt="cart"
                       className="w-full h-full"
                     />
@@ -251,7 +238,7 @@ function Home() {
           </div>
           <div className="flex flex-col items-center md:w-[48%] xl:w-full">
             <img
-              src={getImageUrl("image30", "webp")}
+              src={getImageUrl("product-3", "png")}
               alt="product"
               className="w-full h-full"
             />
@@ -279,7 +266,7 @@ function Home() {
                 >
                   <div>
                     <img
-                      src={getImageUrl("ShoppingCartOrange", "svg")}
+                      src={getImageUrl("ShoppingCart-yellow", "png")}
                       alt="cart"
                       className="w-full h-full"
                     />
@@ -290,7 +277,7 @@ function Home() {
           </div>
           <div className="flex flex-col items-center md:w-[48%] xl:w-full">
             <img
-              src={getImageUrl("image31", "webp")}
+              src={getImageUrl("product-4", "png")}
               alt="product"
               className="w-full h-full"
             />
@@ -318,7 +305,7 @@ function Home() {
                 >
                   <div>
                     <img
-                      src={getImageUrl("ShoppingCartOrange", "svg")}
+                      src={getImageUrl("ShoppingCart-yellow", "png")}
                       alt="cart"
                       className="w-full h-full"
                     />
@@ -343,7 +330,7 @@ function Home() {
         </div>
         <div className="mt-16">
           <img
-            src={getImageUrl("map", "webp")}
+            src={getImageUrl("map", "png")}
             alt="map"
             className="w-full h-full"
           />
@@ -353,7 +340,7 @@ function Home() {
         <div className="flex flex-col gap-y-4 md:gap-x-5 lg:flex-row lg:items-center">
           <div className="lg:w-1/2">
             <img
-              src={getImageUrl("Rectangle295", "webp")}
+              src={getImageUrl("testimonial-section", "png")}
               alt="profile-image-testimonial"
               className="w-full h-full lg:w-auto lg:h-auto"
             />
@@ -378,26 +365,26 @@ function Home() {
             </span>
             <div className="self-baseline">
               <img
-                src={getImageUrl("star", "webp")}
+                src={getImageUrl("stars", "png")}
                 alt="star"
                 className="w-full h-full"
               />
             </div>
             <div className="flex gap-x-3 self-baseline">
               <img
-                src={getImageUrl("arrow-left", "webp")}
+                src={getImageUrl("arrow-left", "png")}
                 alt="arrow-left"
                 className="w-full h-full"
               />
               <img
-                src={getImageUrl("arrow-right", "webp")}
+                src={getImageUrl("arrow-right", "png")}
                 alt="arrow-right"
                 className="w-full h-full"
               />
             </div>
-            <div className="self-baseline pt-10">
+            <div className="self-baseline">
               <img
-                src={getImageUrl("paginate", "webp")}
+                src={getImageUrl("carousel", "png")}
                 alt="paginate"
                 className="w-full h-full"
               />
