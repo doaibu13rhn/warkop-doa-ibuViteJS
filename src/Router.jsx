@@ -13,7 +13,7 @@ import DetailOrder from "./pages/user/DetailOrder";
 
 const router = createBrowserRouter([
   {
-    path: "/login",
+    path: "/",
     element: <Login />,
     // errorElement: "",
   },

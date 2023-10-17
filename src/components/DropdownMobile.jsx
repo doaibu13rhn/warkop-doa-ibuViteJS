@@ -46,7 +46,7 @@ function DropdownMobile(props) {
           </li>
           
             <li className="p-1 text-light hover:bg-primary text-center hover:text-[#0B0909] hover:font-medium">
-              <Link to="/login">Sign In</Link>
+              <Link to="/">Sign In</Link>
             </li>
           
           

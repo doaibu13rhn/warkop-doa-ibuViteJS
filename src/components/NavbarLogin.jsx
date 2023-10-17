@@ -78,12 +78,11 @@ function NavbarLogin(props) {
               <Link to="/detail-product">Detail product</Link>
             </li>
             <li className="p-1 text-light hover:bg-primary hover:text-[#0B0909] hover:font-medium">
-              {/*  eslint-disable-next-line react/prop-types */}
               <button onClick={() => props.isLogoutClick()}>Logout</button>
             </li>
           </ul>
         </div>
-        {/*  eslint-disable-next-line react/prop-types */}
+
         <Link to="#" className="icon-search block lg:hidden">
           <img
             src={getImageUrl("Search", "png")}

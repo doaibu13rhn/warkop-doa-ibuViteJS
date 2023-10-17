@@ -40,7 +40,7 @@ function Navbar(props) {
           />
         </Link>
         <Link
-          to="/login"
+          to="/"
           className="text-light text-sm font-medium py-3 px-[18px] border border-[#ebeaea] hover:bg-light hover:text-dark rounded-md hidden lg:block active:ring active:ring-slate-300"
         >
           Sign In

@@ -77,7 +77,7 @@ function Home() {
             />
           </div>
         </div>
-        <div className="w-full h-screen flex items-center py-4 px-5 md:px-24 lg:px-[130px] xl:h-[574px] xl:w-1/2">
+        <div className="w-full h-screen flex items-center py-4 px-5 md:px-24 lg:px-[90px] xl:h-[574px] xl:w-1/2">
           <article className="flex flex-col gap-y-6">
             <div className="flex gap-x-6 items-center flex-col gap-y-4 xl:flex-row">
               <div className="hidden bg-primary md:w-4 h-16 xl:block"></div>
@@ -98,48 +98,48 @@ function Home() {
                   <img
                     src={getImageUrl("checklist", "png")}
                     alt="check"
-                    className="w-full h-full"
+                    className="w-full"
                   />
                 </div>
-                <span className="text-sm font-normal text-secondary">
+                <p className="text-sm font-normal text-secondary">
                   High quality beans
-                </span>
+                </p>
               </div>
               <div className="flex items-center gap-x-[10px]">
                 <div>
                   <img
                     src={getImageUrl("checklist", "png")}
                     alt="check"
-                    className="w-full h-full"
+                    className="w-full"
                   />
                 </div>
-                <span className="text-sm font-normal text-secondary">
+                <p className="text-sm font-normal text-secondary">
                   Healthy meals, you can request the ingredients
-                </span>
+                </p>
+              </div>
+              <div className="flex items-center gap-x-[10px]  ">
+                <div>
+                  <img
+                    src={getImageUrl("checklist", "png")}
+                    alt="check"
+                    className="w-full"
+                  />
+                </div>
+                <p className="text-sm font-normal text-secondary">
+                  Chat with our staff to get better experience
+                </p>
               </div>
               <div className="flex items-center gap-x-[10px]">
                 <div>
                   <img
                     src={getImageUrl("checklist", "png")}
                     alt="check"
-                    className="w-full h-full"
+                    className="w-full"
                   />
                 </div>
-                <span className="text-sm font-normal text-secondary">
-                  Chat with our staff to get better experience for ordering
-                </span>
-              </div>
-              <div className="flex items-center gap-x-[10px]">
-                <div>
-                  <img
-                    src={getImageUrl("checklist", "png")}
-                    alt="check"
-                    className="w-full h-full"
-                  />
-                </div>
-                <span className="text-sm font-normal text-secondary">
-                  Free member card with a minimum purchase of IDR 200.000.
-                </span>
+                <p className="text-sm font-normal text-secondary">
+                  Free member card with a minimum purchase
+                </p>
               </div>
             </div>
           </article>
