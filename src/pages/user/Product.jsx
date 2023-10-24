@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import getImageUrl from "../../utils/imageGetter";
+import { Link, useNavigate } from "react-router-dom";
 
 import "../../style/style.css";
 // import NavbarLogin from "../../components/NavbarLogin";
@@ -16,6 +17,7 @@ function Product() {
   return (
     <>
       <Navbar isClick={() => setIsDropdownShow(true)}></Navbar>
+      <main>
       <header className="hidden md:w-full md:h-[305px] md:bg-[url('/src/assets/images/product-hero.png')] md:flex md:items-center md:px-24 lg:px-[130px]">
         <h1 className="font-plusJakartaSans text-5xl font-medium w-[80%] text-light leading-tight">
           We Provide Good Coffee and Healthy Meals
@@ -244,13 +246,17 @@ function Product() {
                   type="button"
                   className="text-base font-medium border-2 border-primary text-dark bg-light p-2 rounded-md hover:bg-slate-200 active:ring active:ring-orange-300 flex justify-center items-center md:w-1/4"
                 >
+                  <Link to="/detailProduct">
                   <div>
+                    
                     <img
                       src={getImageUrl("ShoppingCart-yellow", "png")}
                       alt="cart"
                       className="w-full h-full"
                     />
+                    
                   </div>
+                  </Link>
                 </button>
               </div>
             </div>
@@ -287,13 +293,17 @@ function Product() {
                   type="button"
                   className="text-base font-medium border-2 border-primary text-dark bg-light p-2 rounded-md hover:bg-slate-200 active:ring active:ring-orange-300 flex justify-center items-center md:w-1/4"
                 >
+                  <Link to="/detailProduct">
                   <div>
+                    
                     <img
                       src={getImageUrl("ShoppingCart-yellow", "png")}
                       alt="cart"
                       className="w-full h-full"
                     />
+                    
                   </div>
+                  </Link>
                 </button>
               </div>
             </div>
@@ -330,13 +340,17 @@ function Product() {
                   type="button"
                   className="text-base font-medium border-2 border-primary text-dark bg-light p-2 rounded-md hover:bg-slate-200 active:ring active:ring-orange-300 flex justify-center items-center md:w-1/4"
                 >
+                  <Link to="/detailProduct">
                   <div>
+                    
                     <img
-                       src={getImageUrl("ShoppingCart-yellow", "png")}
+                      src={getImageUrl("ShoppingCart-yellow", "png")}
                       alt="cart"
                       className="w-full h-full"
                     />
+                    
                   </div>
+                  </Link>
                 </button>
               </div>
             </div>
@@ -373,13 +387,17 @@ function Product() {
                   type="button"
                   className="text-base font-medium border-2 border-primary text-dark bg-light p-2 rounded-md hover:bg-slate-200 active:ring active:ring-orange-300 flex justify-center items-center md:w-1/4"
                 >
+                  <Link to="/detailProduct">
                   <div>
+                    
                     <img
-                       src={getImageUrl("ShoppingCart-yellow", "png")}
+                      src={getImageUrl("ShoppingCart-yellow", "png")}
                       alt="cart"
                       className="w-full h-full"
                     />
+                    
                   </div>
+                  </Link>
                 </button>
               </div>
             </div>
@@ -416,13 +434,17 @@ function Product() {
                   type="button"
                   className="text-base font-medium border-2 border-primary text-dark bg-light p-2 rounded-md hover:bg-slate-200 active:ring active:ring-orange-300 flex justify-center items-center md:w-1/4"
                 >
+                  <Link to="/detailProduct">
                   <div>
+                    
                     <img
                       src={getImageUrl("ShoppingCart-yellow", "png")}
                       alt="cart"
                       className="w-full h-full"
                     />
+                    
                   </div>
+                  </Link>
                 </button>
               </div>
             </div>
@@ -459,13 +481,17 @@ function Product() {
                   type="button"
                   className="text-base font-medium border-2 border-primary text-dark bg-light p-2 rounded-md hover:bg-slate-200 active:ring active:ring-orange-300 flex justify-center items-center md:w-1/4"
                 >
+                  <Link to="/detailProduct">
                   <div>
+                    
                     <img
-                       src={getImageUrl("ShoppingCart-yellow", "png")}
+                      src={getImageUrl("ShoppingCart-yellow", "png")}
                       alt="cart"
                       className="w-full h-full"
                     />
+                    
                   </div>
+                  </Link>
                 </button>
               </div>
             </div>
@@ -499,6 +525,7 @@ function Product() {
             />
           </div>
         </section>
+      </main>
       </main>
       {isDropdownShown && (
         <DropdownMobile isClick={() => setIsDropdownShow(false)} />

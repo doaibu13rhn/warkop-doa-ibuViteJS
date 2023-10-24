@@ -321,7 +321,6 @@ function DetailProduct() {
         <DropdownMobile isClick={() => setIsDropdownShow(false)} />
       )}
       <Footer />
-      {/* {openModal && <Modal closeModal={setOpenModal} message={Message} />} */}
     </>
   );
 }

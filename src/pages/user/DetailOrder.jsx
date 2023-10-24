@@ -12,6 +12,7 @@ function DetailOrder() {
       <NavbarLogin
         isClick={() => setIsDropdownShow(true)}
       />
+      <main>
       <header className="font-plusJakartaSans py-8 px-5 md:px-24 lg:py-10 lg:px-[130px] min-[1400px]:pt-[78px] min-[1400px]:pb-[64px]">
         <h1 className="text-2xl font-medium text-dark md:text-3xl lg:text-3xl xl:text-5xl">
           Order <span className="font-bold">#12354-09893</span>
@@ -37,7 +38,7 @@ function DetailOrder() {
                 />
               </div>
               <p className="flex-1 text-secondary font-medium">Fullname</p>
-              <p className="flex-1 text-dark font-bold text-right">
+              <p className="flex-2 text-dark font-bold text-right">
                 Ghaluh Wizard Anggoro
               </p>
             </div>
@@ -50,7 +51,7 @@ function DetailOrder() {
                 />
               </div>
               <p className="flex-1 text-secondary font-medium">Address</p>
-              <p className="flex-1 text-dark font-bold text-right">
+              <p className="flex-2 text-dark font-bold text-right">
                 Griya bandung indah
               </p>
             </div>
@@ -175,6 +176,7 @@ function DetailOrder() {
             </div>
           </section>
         </section>
+      </main>
       </main>
       <Footer />
       {isDropdownShown && (

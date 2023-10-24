@@ -10,6 +10,7 @@ import DetailProduct from "./pages/user/DetailProduct";
 import CheckoutProduct from "./pages/user/CheckoutProduct";
 import HistoryOrder from "./pages/user/HistoryOrder";
 import DetailOrder from "./pages/user/DetailOrder";
+import ProductAdmin from "./pages/admin/product-admin";
 
 const router = createBrowserRouter([
   {
@@ -52,6 +53,10 @@ const router = createBrowserRouter([
   {
     path: "/detailOrder",
     element: <DetailOrder />,
+  },
+  {
+    path: "/product-admin",
+    element: <ProductAdmin />,
   },
 ]);
 

@@ -19,6 +19,25 @@ function Register() {
     setIsPassShown2((state) => !state);
   };
 
+  const submitHandler = (e) => {
+    e.preventDefault();
+
+    if (e.target.password.value !== e.target.confirmPassword.value)
+      return alert('Passwod isnt match');
+
+    const body = {
+      users_Username: e.target.Username.value,
+      users_email: e.target.email.value,
+      users_password: e.target.password.value,
+    };
+
+    const url = "http://localhost:8000/auth/register";
+
+    axios.post(url, body)
+    .then((res) => console.log(res))
+    .catch((err) => console.log(err));
+  };
+
   return (
     <>
       <main className="flex gap-[70px] lg:items-center">
@@ -41,17 +60,17 @@ function Register() {
               Fill out the form correctly
             </span>
           </header>
-          <form className="flex flex-col gap-y-5">
+          <form className="flex flex-col gap-y-5" onSubmit={submitHandler}>
             <div className="flex flex-col gap-y-3 relative">
               <label
-                htmlFor="fullname"
+                htmlFor="Username"
                 className="text-sm md:text-base font-semibold text-[#0B132A] lg:text-base"
               >
                 Full Name
               </label>
               <input
                 type="text"
-                id="fullname"
+                id="Username"
                 placeholder="Enter Your Full Name"
                 className="py-3.5 px-10 border rounded-lg border-[#DEDEDE] text-xs tracking-wide outline-none focus:border-primary"
               />

@@ -15,6 +15,7 @@ function Home() {
   return (
     <>
       <Navbar isClick={() => setIsDropdownShow(true)}></Navbar>
+      <main>
       <header className="flex flex-wrap font-plusJakartaSans">
         <div className="w-full max-sm:h-screen select-none flex items-center py-4 px-5 md:px-24 lg:px-[130px] max-[1400px]:h-[700px] min-[1400px]:h-[1024px] xl:w-1/2 header-section">
           <article className="flex flex-col gap-y-6 items-baseline relative">
@@ -392,6 +393,7 @@ function Home() {
           </div>
         </div>
       </section>
+      </main>
       {isDropdownShown && (
         <DropdownMobile isClick={() => setIsDropdownShow(false)} />
       )}

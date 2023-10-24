@@ -16,9 +16,9 @@ function CheckoutProduct() {
       <NavbarLogin isClick={() => setIsDropdownShow(true)}/>
       <main>
       <section
-      className="font-plusJakartaSans py-10 px-5 md:px-24 lg:pt-20 lg:pb-16 lg:px-[130px]"
+      className="font-plusJakartaSans py-10 px-5 md:px-24 lg:px-[130px]"
     >
-      <h1 className="text-2xl font-medium text-dark lg:text-4xl">
+      <h1 className="text-3xl font-medium text-dark lg:text-4xl">
         Payment Details
       </h1>
     </section>

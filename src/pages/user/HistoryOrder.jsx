@@ -15,6 +15,7 @@ function HistoryOrder() {
       <NavbarLogin
         isClick={() => setIsDropdownShow(true)}
       />
+      <main>
       <header className="font-plusJakartaSans py-8 px-5 md:px-24 lg:py-10 lg:px-[130px] min-[1400px]:pt-[78px] min-[1400px]:pb-[64px] flex justify-between items-end md:justify-normal md:gap-7">
         <h1 className="text-2xl font-medium text-dark md:text-3xl xl:text-5xl">
           History Order
@@ -127,7 +128,7 @@ function HistoryOrder() {
                   </span>
                 </div>
                 <Link
-                  to="/detail-order"
+                  to="/detailOrder"
                   className="text-sm font-medium text-dark underline underline-offset-2 max-sm:w-full text-center sm:text-left"
                 >
                   Views Order Detail
@@ -212,7 +213,7 @@ function HistoryOrder() {
                   </span>
                 </div>
                 <Link
-                  to="/detail-order"
+                  to="/detailOrder"
                   className="text-sm font-medium text-dark underline underline-offset-2 max-sm:w-full text-center sm:text-left"
                 >
                   Views Order Detail
@@ -297,7 +298,7 @@ function HistoryOrder() {
                   </span>
                 </div>
                 <Link
-                  to="/detail-order"
+                  to="/detailOrder"
                   className="text-sm font-medium text-dark underline underline-offset-2 max-sm:w-full text-center sm:text-left"
                 >
                   Views Order Detail
@@ -382,7 +383,7 @@ function HistoryOrder() {
                   </span>
                 </div>
                 <Link
-                  to="/detail-order"
+                  to="/detailOrder"
                   className="text-sm font-medium text-dark underline underline-offset-2 max-sm:w-full text-center sm:text-left"
                 >
                   Views Order Detail
@@ -442,6 +443,7 @@ function HistoryOrder() {
             </button>
           </section>
         </aside>
+      </main>
       </main>
       <Footer />
       {isDropdownShown && (

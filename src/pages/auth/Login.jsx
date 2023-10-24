@@ -6,12 +6,27 @@ import "../../style/style.css";
 import getImageUrl from "../../utils/imageGetter";
 
 function Login() {
- 
+  useEffect(() => {
+    document.title = "Login";
+  });
 
   const [isPassShown, setIsPassShown] = useState(false);
   const showPassHandler = () => {
     setIsPassShown((state) => !state);
   };
+  const navigate = useNavigate();
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    const body = {
+      users_email: e.target.email.value,
+      users_Password: e.target.password.value,
+    };
+    const url = "http://localhost:8000/auth";
+    axios.post(url,body)
+    .then((res) => console.log(res))
+    .catch((err) => console.log(err))
+  }
 
   return (
     <>
@@ -35,7 +50,7 @@ function Login() {
               Fill out the form correctly
             </span>
           </header>
-          <form className="flex flex-col gap-y-5">
+          <form className="flex flex-col gap-y-5" onSubmit={submitHandler}>
             <div className="flex flex-col gap-y-3 relative">
               <label
                 htmlFor="email"
@@ -59,7 +74,7 @@ function Login() {
             </div>
             <div className="flex flex-col gap-y-3 relative">
               <label
-                htmlFor="password"
+                htmlFor="Password"
                 className="text-sm md:text-base font-semibold text-[#0B132A] lg:text-base"
               >
                 Password
@@ -87,7 +102,7 @@ function Login() {
                 <img
                   src={getImageUrl("EyeSlash", "png")}
                   alt="EyeSlash"
-                  className="w-full h-full"
+                  className="w-full h-full cursor-pointer"
                 />
               </div>
               <div
@@ -100,7 +115,7 @@ function Login() {
                 <img
                   src={getImageUrl("EyeSlash", "png")}
                   alt="eye"
-                  className="w-[18px] h-[18px]"
+                  className="w-[18px] h-[18px] cursor-pointer"
                 />
               </div>
             </div>
@@ -111,6 +126,7 @@ function Login() {
               Lupa Password?
             </Link>
             <button
+              // onClick={() => navigate("/home")}
               type="submit"
               className="text-base font-medium text-[#0B132A] bg-primary p-2.5 rounded-md hover:bg-amber-600 active:ring active:ring-orange-300"
             >

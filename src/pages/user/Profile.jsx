@@ -22,6 +22,7 @@ function Profile() {
       <NavbarLogin
         isClick={() => setIsDropdownShow(true)}
       />
+      <main>
       <header className="pt-10 pb-7 px-5 md:px-24 lg:px-[130px]">
         <h1 className="font-plusJakartaSans text-2xl font-medium text-[#0B0909] md:text-3xl xl:text-5xl">
           Profile
@@ -191,6 +192,7 @@ function Profile() {
           </section>
         </main>
       </form>
+      </main>
       <Footer />
       {isDropdownShown && (
         <DropdownMobile isClick={() => setIsDropdownShow(false)} />
