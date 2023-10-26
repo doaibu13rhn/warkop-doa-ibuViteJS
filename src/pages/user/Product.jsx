@@ -1,24 +1,136 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import getImageUrl from "../../utils/imageGetter";
-import { Link, useNavigate } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 
 import "../../style/style.css";
-// import NavbarLogin from "../../components/NavbarLogin";
+import getImageUrl from "../../utils/imageGetter";
+import Navbar from "../../components/Navbar";
 import DropdownMobile from "../../components/DropdownMobile";
 import Footer from "../../components/Footer";
 import PromoCard from "../../components/PromoCard";
-import Navbar from "../../components/Navbar";
+import ItemProduct from "../../components/ItemProduct";
+import Modal from "../../components/modal/Modal";
 
 function Product() {
+  useEffect(() => {
+    document.title = "Product";
+  });
 
+  // eslint-disable-next-line no-unused-vars
+  const [Message, setMessage] = useState({
+    msg: null,
+    isError: null,
+  });
+  const [openModal, setOpenModal] = useState({ isOpen: false, status: null });
   const [isDropdownShown, setIsDropdownShow] = useState(false);
+
+  const token = localStorage.getItem("token");
+  const url = import.meta.env.VITE_BACKEND_HOST;
+  const authAxios = axios.create({
+    baseURL: url,
+    headers: {
+      Authorization: `Barer ${token}`,
+    },
+  });
+
+  const [product, setProduct] = useState([]);
+  useEffect(() => {
+    authAxios
+      .get("/products")
+      .then((res) => {
+        setProduct(res.data.result);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
+  // eslint-disable-next-line no-unused-vars
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [search, setSearch] = useState();
+  const [category, setCategory] = useState();
+
+  const setSearchHandler = (e) => {
+    setSearch(e.target.value);
+  };
+  const setCategoryHandler = (e) => {
+    setCategory(e.target.value);
+  };
+
+  const [rangeOne, setRangeOne] = useState(10000);
+  const [rangeTwo, setRangeTwo] = useState(99000);
+
+  const rangeOneHandler = (e) => {
+    setRangeOne(e.target.value);
+  };
+  const rangeTwoHandler = (e) => {
+    setRangeTwo(e.target.value);
+  };
+
+  const OnSubmitHandler = (e) => {
+    e.preventDefault();
+
+    let urlProduct = `/products`;
+    if (rangeOne && rangeTwo) {
+      setSearchParams((prev) => ({
+        ...prev,
+        minrange: rangeOne,
+        maxrange: rangeTwo,
+      }));
+      urlProduct = `/products?minrange=${rangeOne}&maxrange=${rangeTwo}`;
+    }
+
+    if (search) {
+      setSearchParams((prev) => ({
+        ...prev,
+        name: search,
+        minrange: rangeOne,
+        maxrange: rangeTwo,
+      }));
+      urlProduct = `/products?name=${search.toLowerCase()}&minrange=${rangeOne}&maxrange=${rangeTwo}`;
+    }
+
+    if (category) {
+      setSearchParams((prev) => ({
+        ...prev,
+        category: category,
+        minrange: rangeOne,
+        maxrange: rangeTwo,
+      }));
+      urlProduct = `/products?category=${category.toLowerCase()}&minrange=${rangeOne}&maxrange=${rangeTwo}`;
+    }
+
+    if (search && category) {
+      setSearchParams((prev) => ({
+        ...prev,
+        name: search,
+        category: category,
+        minrange: rangeOne,
+        maxrange: rangeTwo,
+      }));
+      urlProduct = `/products?name=${search.toLowerCase()}&category=${category.toLowerCase()}&minrange=${rangeOne}&maxrange=${rangeTwo}`;
+    }
+
+    // if (!search && !category) {
+    //   setSearchParams((prev) => ({
+    //     ...prev,
+    //   }));
+    //   urlProduct = `/products`;
+    // }
+    authAxios
+      .get(urlProduct)
+      .then((res) => setProduct(res.data.result))
+      .catch(() => setProduct([]));
+  };
 
   return (
     <>
-      <Navbar isClick={() => setIsDropdownShow(true)}></Navbar>
-      <main>
-      <header className="hidden md:w-full md:h-[305px] md:bg-[url('/src/assets/images/product-hero.png')] md:flex md:items-center md:px-24 lg:px-[130px]">
+      <Navbar
+        isClick={() => setIsDropdownShow(true)}
+        isLogoutClick={() => {
+          setOpenModal({ isOpen: true, status: "logout" });
+          setMessage({ msg: "Are You Sure?" });
+        }}
+      />
+      <header className="hidden md:w-full md:h-[305px] md:bg-[url('/src/assets/img/Rectangle299.webp')] md:flex md:items-center md:px-24 lg:px-[130px] bg-no-repeat bg-cover">
         <h1 className="font-plusJakartaSans text-5xl font-medium w-[80%] text-light leading-tight">
           We Provide Good Coffee and Healthy Meals
         </h1>
@@ -31,14 +143,14 @@ function Product() {
           <div className="hidden md:flex gap-x-3">
             <button type="button">
               <img
-                src={getImageUrl("arrow-left-gr", "png")}
+                src={getImageUrl("arrow-left-grey", "svg")}
                 alt="arrow-left"
                 className="w-full h-full"
               />
             </button>
             <button type="button">
               <img
-                src={getImageUrl("arrow-right", "png")}
+                src={getImageUrl("arrow-right-2", "svg")}
                 alt="arrow-right"
                 className="w-full h-full"
               />
@@ -49,17 +161,17 @@ function Product() {
           className="w-full md:pt-6 md:pb-8 flex gap-x-12 overflow-x-scroll no-scrollbar"
           id="promo-card"
         >
-          <PromoCard name="kupon-ijo" />
-          <PromoCard name="kupon-ijo" />
-          <PromoCard name="kupon-ijo" />
-          <PromoCard name="kupon-ijo" />
-          <PromoCard name="kupon-ijo" />
-          <PromoCard name="kupon-ijo" />
+          <PromoCard name="promo-card1" />
+          <PromoCard name="promo-card1" />
+          <PromoCard name="promo-card1" />
+          <PromoCard name="promo-card2" />
+          <PromoCard name="promo-card2" />
+          <PromoCard name="promo-card1" />
         </div>
         <div className="pt-8 px-5 md:px-24 lg:px-[127px]">
           <img
-            src={getImageUrl("carousel", "png")}
-            alt="carousel"
+            src={getImageUrl("paginate", "svg")}
+            alt="paginate"
             className="w-[76px] h-full"
           />
         </div>
@@ -78,16 +190,16 @@ function Product() {
           />
           <div className="absolute top-3.5 left-4 md:top-3.5 md:left-4">
             <img
-              src={getImageUrl("Search", "png")}
+              src={getImageUrl("Search-product", "svg")}
               alt="Search-product"
               className="w-full h-full"
             />
           </div>
-          <button className="bg-primary p-4 rounded">
+          <button>
             <img
-              src={getImageUrl("Filter", "png")}
+              src={getImageUrl("sorting-menu", "svg")}
               alt="sorting-menu"
-              className="w-auto flex items-center"
+              className="w-full h-full"
             />
           </button>
         </div>
@@ -100,8 +212,11 @@ function Product() {
             <span className="text-lg font-bold">Search</span>
             <input
               type="text"
+              name="name"
               placeholder="Search Your Product"
               className="py-4 px-5 text-normal font-normal text-[#696F79] rounded tracking-wider outline-none"
+              value={search}
+              onChange={setSearchHandler}
             />
           </div>
           <div className="flex flex-col gap-y-4">
@@ -109,48 +224,40 @@ function Product() {
             <div className="flex flex-col gap-y-4 text-lg font-normal">
               <div className="flex gap-3.5 items-center">
                 <input
-                  type="checkbox"
-                  id="favorite-product"
-                  checked
-                  className="appearance-none w-[24px] h-[24px] bg-none border border-[#a0a3bd] rounded-lg flex items-center justify-center after:font-awesome after:content-['\f00c'] after:font-black after:text-normal after:text-[#0b0909] after:hidden checked:bg-primary checked:border-none checked:after:block"
-                />
-                <label htmlFor="favorite-product">Favorite Product</label>
-              </div>
-              <div className="flex gap-3.5 items-center">
-                <input
-                  type="checkbox"
+                  type="radio"
                   id="coffee"
+                  name="category"
                   className="appearance-none w-[24px] h-[24px] bg-none border border-[#a0a3bd] rounded-lg flex items-center justify-center after:font-awesome after:content-['\f00c'] after:font-black after:text-normal after:text-[#0b0909] after:hidden checked:bg-primary checked:border-none checked:after:block"
+                  value="coffee"
+                  onChange={setCategoryHandler}
                 />
                 <label htmlFor="coffee">Coffee</label>
               </div>
               <div className="flex gap-3.5 items-center">
                 <input
-                  type="checkbox"
+                  type="radio"
                   id="non-coffee"
+                  name="category"
                   className="appearance-none w-[24px] h-[24px] bg-none border border-[#a0a3bd] rounded-lg flex items-center justify-center after:font-awesome after:content-['\f00c'] after:font-black after:text-normal after:text-[#0b0909] after:hidden checked:bg-primary checked:border-none checked:after:block"
+                  value="non-coffee"
+                  onChange={setCategoryHandler}
                 />
                 <label htmlFor="non-coffee">Non Coffee</label>
               </div>
               <div className="flex gap-3.5 items-center">
                 <input
-                  type="checkbox"
-                  id="foods"
+                  type="radio"
+                  id="milk"
+                  name="category"
                   className="appearance-none w-[24px] h-[24px] bg-none border border-[#a0a3bd] rounded-lg flex items-center justify-center after:font-awesome after:content-['\f00c'] after:font-black after:text-normal after:text-[#0b0909] after:hidden checked:bg-primary checked:border-none checked:after:block"
+                  value="milk"
+                  onChange={setCategoryHandler}
                 />
-                <label htmlFor="foods">Foods</label>
-              </div>
-              <div className="flex gap-3.5 items-center">
-                <input
-                  type="checkbox"
-                  id="add-on"
-                  className="appearance-none w-[24px] h-[24px] bg-none border border-[#a0a3bd] rounded-lg flex items-center justify-center after:font-awesome after:content-['\f00c'] after:font-black after:text-normal after:text-[#0b0909] after:hidden checked:bg-primary checked:border-none checked:after:block"
-                />
-                <label htmlFor="add-on">Add-On</label>
+                <label htmlFor="milk">Milk</label>
               </div>
             </div>
           </div>
-          <div className="flex flex-col gap-y-4">
+          {/* <div className="flex flex-col gap-y-4">
             <span className="text-lg font-bold">Sort By</span>
             <div className="flex flex-col gap-y-4 text-lg font-normal">
               <div className="flex gap-3.5 items-center">
@@ -187,350 +294,104 @@ function Product() {
                 <label htmlFor="cheap">Cheap</label>
               </div>
             </div>
-          </div>
+          </div> */}
           <div className="range">
             <span className="text-lg font-bold">Range Price</span>
-            <div className="h-2 bg-light rounded mt-5">
-              <div className="h-2 absolute left-[18%] right-[70%] rounded bg-primary"></div>
+            <div className="h-2 rounded mt-5 ">
+              <div className="h-2 left-[18%] right-[70%] rounded bg-light"></div>
             </div>
             <div className="relative">
               <input
                 type="range"
-                className="w-full h-[8px] pointer-events-none absolute top-[-8px] appearance-none rounded"
+                className="w-full h-[8px] absolute top-[-6px] pointer-events-none appearance-none rounded"
                 min="0"
-                max="10000"
+                max="120000"
+                onChange={rangeOneHandler}
+                defaultValue={rangeOne}
               />
               <input
                 type="range"
-                className="w-full h-[8px] pointer-events-none absolute top-[-8px] appearance-none rounded"
-                min="10000"
-                max="20000"
+                className="w-full h-[8px] absolute top-[-6px] right-0 pointer-events-none appearance-none rounded"
+                min="0"
+                max="120000"
+                onChange={rangeTwoHandler}
+                defaultValue={rangeTwo}
               />
             </div>
+            <div className="flex w-full gap-x-5">
+              <div className="w-1/2 bg-light h-10 mt-6 rounded-md text-dark font-bold flex justify-center items-center">
+                Idr. {rangeOne}
+              </div>
+              <div className="w-1/2 bg-light h-10 mt-6 rounded-md text-dark font-bold flex justify-center items-center">
+                Idr. {rangeTwo}
+              </div>
+            </div>
           </div>
-          <div className="text-sm font-medium text-[#0B0909] py-3 px-4 bg-primary text-center rounded-md hover:bg-amber-600 active:ring active:ring-orange-300 mt-4">
-            <button>Apply Filter</button>
-          </div>
+          <button
+            className="text-sm font-medium text-[#0B0909] py-3 px-4 bg-primary text-center rounded-md hover:bg-amber-600 active:ring active:ring-orange-300 mt-4"
+            type="button"
+            onClick={OnSubmitHandler}
+          >
+            Apply Filter
+          </button>
         </section>
-        <section className="xl:w-4/6">
-        <div className="w-full grid grid-cols-1 md:grid-cols-product md:gap-x-5">
-          <div className="flex flex-col items-center">
-            <img
-              src={getImageUrl("product-1", "png")}
-              alt="product"
-              className="w-full h-full"
-            />
-            <div
-              className="w-[95%] flex flex-col gap-y-3 p-[10px] bg-light drop-shadow-md relative bottom-10 xl:bottom-14"
-            >
-              <span className="text-xl font-medium text-dark lg:text-[22px]"
-                >Hazelnut Latte</span
-              >
-              <p className="text-sm font-normal text-dark">
-                You can explore the menu that we provide with fun and have their
-                own taste and make your day better.
-              </p>
-              <p className="text-lg font-medium text-dark lg:text-[22px]">
-                IDR 20.000
-              </p>
-              <div
-                className="flex flex-col gap-y-2 md:flex-row md:justify-between md:gap-x-2"
-              >
-                <button
-                  type="button"
-                  className="text-base font-medium text-dark bg-primary p-2 rounded-md hover:bg-amber-600 active:ring active:ring-orange-300 md:w-3/4"
-                >
-                  Buy
-                </button>
-                <button
-                  type="button"
-                  className="text-base font-medium border-2 border-primary text-dark bg-light p-2 rounded-md hover:bg-slate-200 active:ring active:ring-orange-300 flex justify-center items-center md:w-1/4"
-                >
-                  <Link to="/detailProduct">
-                  <div>
-                    
-                    <img
-                      src={getImageUrl("ShoppingCart-yellow", "png")}
-                      alt="cart"
-                      className="w-full h-full"
-                    />
-                    
-                  </div>
-                  </Link>
-                </button>
-              </div>
+        {product.length > 0 ? (
+          <section className="xl:w-4/6">
+            <div className="w-full grid grid-cols-1 md:grid-cols-product md:gap-x-5">
+              {product.map((result, i) => (
+                <ItemProduct
+                  key={i}
+                  id={result.products_id}
+                  img={result.products_image}
+                  name={result.products_name}
+                  desc={result.products_desc}
+                  price={result.products_price}
+                />
+              ))}
             </div>
-          </div>
-          <div className="flex flex-col items-center">
-            <img
-              src={getImageUrl("product-2", "png")}
-              alt="product"
-              className="w-full h-full"
-            />
-            <div
-              className="w-[95%] flex flex-col gap-y-3 p-[10px] bg-light drop-shadow-md relative bottom-10 xl:bottom-14"
-            >
-              <span className="text-xl font-medium text-dark lg:text-[22px]"
-                >Hazelnut Latte</span
-              >
-              <p className="text-sm font-normal text-dark">
-                You can explore the menu that we provide with fun and have their
-                own taste and make your day better.
-              </p>
-              <p className="text-lg font-medium text-dark lg:text-[22px]">
-                IDR 20.000
-              </p>
-              <div
-                className="flex flex-col gap-y-2 md:flex-row md:justify-between md:gap-x-2"
-              >
-                <button
-                  type="button"
-                  className="text-base font-medium text-dark bg-primary p-2 rounded-md hover:bg-amber-600 active:ring active:ring-orange-300 md:w-3/4"
-                >
-                  Buy
-                </button>
-                <button
-                  type="button"
-                  className="text-base font-medium border-2 border-primary text-dark bg-light p-2 rounded-md hover:bg-slate-200 active:ring active:ring-orange-300 flex justify-center items-center md:w-1/4"
-                >
-                  <Link to="/detailProduct">
-                  <div>
-                    
-                    <img
-                      src={getImageUrl("ShoppingCart-yellow", "png")}
-                      alt="cart"
-                      className="w-full h-full"
-                    />
-                    
-                  </div>
-                  </Link>
-                </button>
-              </div>
+            <div className="flex justify-center gap-x-4">
+              <img
+                src={getImageUrl("paginate-1", "svg")}
+                alt="paginate-1"
+                className="w-10 h-10"
+              />
+              <img
+                src={getImageUrl("paginate-2", "svg")}
+                alt="paginate-2"
+                className="w-10 h-10"
+              />
+              <img
+                src={getImageUrl("paginate-3", "svg")}
+                alt="paginate-3"
+                className="w-10 h-10"
+              />
+              <img
+                src={getImageUrl("paginate-4", "svg")}
+                alt="paginate-4"
+                className="w-10 h-10"
+              />
+              <img
+                src={getImageUrl("arrow-right", "svg")}
+                alt="arrow-right"
+                className="w-10 h-10"
+              />
             </div>
-          </div>
-          <div className="flex flex-col items-center">
-            <img
-              src={getImageUrl("product-4", "png")}
-              alt="product"
-              className="w-full h-full"
-            />
-            <div
-              className="w-[95%] flex flex-col gap-y-3 p-[10px] bg-light drop-shadow-md relative bottom-10 xl:bottom-14"
-            >
-              <span className="text-xl font-medium text-dark lg:text-[22px]"
-                >Hazelnut Latte</span
-              >
-              <p className="text-sm font-normal text-dark">
-                You can explore the menu that we provide with fun and have their
-                own taste and make your day better.
-              </p>
-              <p className="text-lg font-medium text-dark lg:text-[22px]">
-                IDR 20.000
-              </p>
-              <div
-                className="flex flex-col gap-y-2 md:flex-row md:justify-between md:gap-x-2"
-              >
-                <button
-                  type="button"
-                  className="text-base font-medium text-dark bg-primary p-2 rounded-md hover:bg-amber-600 active:ring active:ring-orange-300 md:w-3/4"
-                >
-                  Buy
-                </button>
-                <button
-                  type="button"
-                  className="text-base font-medium border-2 border-primary text-dark bg-light p-2 rounded-md hover:bg-slate-200 active:ring active:ring-orange-300 flex justify-center items-center md:w-1/4"
-                >
-                  <Link to="/detailProduct">
-                  <div>
-                    
-                    <img
-                      src={getImageUrl("ShoppingCart-yellow", "png")}
-                      alt="cart"
-                      className="w-full h-full"
-                    />
-                    
-                  </div>
-                  </Link>
-                </button>
-              </div>
+          </section>
+        ) : (
+          <section className="xl:w-4/6">
+            <div className="w-full">
+              <h1 className="text-5xl text-center">Products Not Found!</h1>
             </div>
-          </div>
-          <div className="flex flex-col items-center">
-            <img
-              src={getImageUrl("product-3", "png")}
-              alt="product"
-              className="w-full h-full"
-            />
-            <div
-              className="w-[95%] flex flex-col gap-y-3 p-[10px] bg-light drop-shadow-md relative bottom-10 xl:bottom-14"
-            >
-              <span className="text-xl font-medium text-dark lg:text-[22px]"
-                >Hazelnut Latte</span
-              >
-              <p className="text-sm font-normal text-dark">
-                You can explore the menu that we provide with fun and have their
-                own taste and make your day better.
-              </p>
-              <p className="text-lg font-medium text-dark lg:text-[22px]">
-                IDR 20.000
-              </p>
-              <div
-                className="flex flex-col gap-y-2 md:flex-row md:justify-between md:gap-x-2"
-              >
-                <button
-                  type="button"
-                  className="text-base font-medium text-dark bg-primary p-2 rounded-md hover:bg-amber-600 active:ring active:ring-orange-300 md:w-3/4"
-                >
-                  Buy
-                </button>
-                <button
-                  type="button"
-                  className="text-base font-medium border-2 border-primary text-dark bg-light p-2 rounded-md hover:bg-slate-200 active:ring active:ring-orange-300 flex justify-center items-center md:w-1/4"
-                >
-                  <Link to="/detailProduct">
-                  <div>
-                    
-                    <img
-                      src={getImageUrl("ShoppingCart-yellow", "png")}
-                      alt="cart"
-                      className="w-full h-full"
-                    />
-                    
-                  </div>
-                  </Link>
-                </button>
-              </div>
-            </div>
-          </div>
-          <div className="flex flex-col items-center">
-            <img
-              src={getImageUrl("product-1", "png")}
-              alt="product"
-              className="w-full h-full"
-            />
-            <div
-              className="w-[95%] flex flex-col gap-y-3 p-[10px] bg-light drop-shadow-md relative bottom-10 xl:bottom-14"
-            >
-              <span className="text-xl font-medium text-dark lg:text-[22px]"
-                >Hazelnut Latte</span
-              >
-              <p className="text-sm font-normal text-dark">
-                You can explore the menu that we provide with fun and have their
-                own taste and make your day better.
-              </p>
-              <p className="text-lg font-medium text-dark lg:text-[22px]">
-                IDR 20.000
-              </p>
-              <div
-                className="flex flex-col gap-y-2 md:flex-row md:justify-between md:gap-x-2"
-              >
-                <button
-                  type="button"
-                  className="text-base font-medium text-dark bg-primary p-2 rounded-md hover:bg-amber-600 active:ring active:ring-orange-300 md:w-3/4"
-                >
-                  Buy
-                </button>
-                <button
-                  type="button"
-                  className="text-base font-medium border-2 border-primary text-dark bg-light p-2 rounded-md hover:bg-slate-200 active:ring active:ring-orange-300 flex justify-center items-center md:w-1/4"
-                >
-                  <Link to="/detailProduct">
-                  <div>
-                    
-                    <img
-                      src={getImageUrl("ShoppingCart-yellow", "png")}
-                      alt="cart"
-                      className="w-full h-full"
-                    />
-                    
-                  </div>
-                  </Link>
-                </button>
-              </div>
-            </div>
-          </div>
-          <div className="flex flex-col items-center">
-            <img
-              src={getImageUrl("product-2", "png")}
-              alt="product"
-              className="w-full h-full"
-            />
-            <div
-              className="w-[95%] flex flex-col gap-y-3 p-[10px] bg-light drop-shadow-md relative bottom-10 xl:bottom-14"
-            >
-              <span className="text-xl font-medium text-dark lg:text-[22px]"
-                >Hazelnut Latte</span
-              >
-              <p className="text-sm font-normal text-dark">
-                You can explore the menu that we provide with fun and have their
-                own taste and make your day better.
-              </p>
-              <p className="text-lg font-medium text-dark lg:text-[22px]">
-                IDR 20.000
-              </p>
-              <div
-                className="flex flex-col gap-y-2 md:flex-row md:justify-between md:gap-x-2"
-              >
-                <button
-                  type="button"
-                  className="text-base font-medium text-dark bg-primary p-2 rounded-md hover:bg-amber-600 active:ring active:ring-orange-300 md:w-3/4"
-                >
-                  Buy
-                </button>
-                <button
-                  type="button"
-                  className="text-base font-medium border-2 border-primary text-dark bg-light p-2 rounded-md hover:bg-slate-200 active:ring active:ring-orange-300 flex justify-center items-center md:w-1/4"
-                >
-                  <Link to="/detailProduct">
-                  <div>
-                    
-                    <img
-                      src={getImageUrl("ShoppingCart-yellow", "png")}
-                      alt="cart"
-                      className="w-full h-full"
-                    />
-                    
-                  </div>
-                  </Link>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-          <div className="flex justify-center gap-x-4">
-            <img
-              src={getImageUrl("page-1", "png")}
-              alt="page-1"
-              className="w-10 h-10 cursor-pointer"
-            />
-            <img
-              src={getImageUrl("page-2", "png")}
-              alt="page-2"
-              className="w-10 h-10 cursor-pointer"
-            />
-            <img
-              src={getImageUrl("page-3", "png")}
-              alt="page-3"
-              className="w-10 h-10 cursor-pointer"
-            />
-            <img
-              src={getImageUrl("page-4", "png")}
-              alt="page-4"
-              className="w-10 h-10 cursor-pointer"
-            />
-            <img
-              src={getImageUrl("arrow-right", "png")}
-              alt="arrow-right"
-              className="w-10 h-10 cursor-pointer"
-            />
-          </div>
-        </section>
+          </section>
+        )}
       </main>
-      </main>
+      <Footer />
       {isDropdownShown && (
         <DropdownMobile isClick={() => setIsDropdownShow(false)} />
       )}
-      <Footer />
+      {openModal.isOpen && (
+        <Modal modal={openModal} closeModal={setOpenModal} message={Message} />
+      )}
     </>
   );
 }
